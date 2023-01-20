@@ -3,13 +3,13 @@
     "key": "sc",
     "measurements": [
         {
-            "name": "Fuel",
-            "key": "prop.fuel",
+            "name": "Acceleration X",
+            "key": "prop.accx",
             "values": [
                 {
                     "key": "value",
                     "name": "Value",
-                    "units": "kilograms",
+                    "units": "m/s²",
                     "format": "float",
                     "min": 0,
                     "max": 100,
@@ -29,146 +29,231 @@
             ]
         },
         {
-            "name": "Thrusters",
-            "key": "prop.thrusters",
+            "name": "Acceleration Y",
+            "key": "prop.accy",
             "values": [
                 {
                     "key": "value",
                     "name": "Value",
-                    "format": "enum",
-                    "enumerations": [
-                        {
-                            "string": "ON",
-                            "value": 1
-                        },
-                        {
-                            "string": "OFF",
-                            "value": 0
-                        }
+                    "format": "float",
+                    "hints": {
+                        "range": 1
+                    }
+                },
+                {
+                    "key": "utc",
+                    "source": "timestamp",
+                    "name": "Timestamp",
+                    "format": "utc",
+                    "hints": {
+                        "domain": 1
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Acceleration Z",
+            "key": "prop.accz",
+            "values": [
+                {
+                    "key": "value",
+                    "name": "Value",
+                    "units": "m/s²",
+                    "format": "float",
+                    "hints": {
+                        "range": 1
+                    }
+                },
+                {
+                    "key": "utc",
+                    "source": "timestamp",
+                    "name": "Timestamp",
+                    "format": "utc",
+                    "hints": {
+                        "domain": 1
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Altitude",
+            "key": "prop.alt",
+            "values": [
+                {
+                    "key": "value",
+                    "name": "Value",
+                    "units": "float",
+                    "format": "integer",
+                    "hints": {
+                        "range": 1
+                    }
+                },
+                {
+                    "key": "utc",
+                    "source": "timestamp",
+                    "name": "Timestamp",
+                    "format": "utc",
+                    "hints": {
+                        "domain": 1
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Humidity",
+            "key": "prop.humid",
+            "values": [
+                {
+                    "key": "value",
+                    "name": "Value",
+                    "units": "%",
+                    "format": "float",
+                    "hints": {
+                        "range": 1
+                    }
+                },
+                {
+                    "key": "utc",
+                    "source": "timestamp",
+                    "name": "Timestamp",
+                    "format": "utc",
+                    "hints": {
+                        "domain": 1
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Temperature",
+            "key": "prop.temp",
+            "values": [
+                {
+                    "key": "value",
+                    "name": "Value",
+                    "units": "°C",
+                    "format": "float",
+                    "hints": {
+                        "range": 1
+                    }
+                },
+                {
+                    "key": "utc",
+                    "source": "timestamp",
+                    "name": "Timestamp",
+                    "format": "utc",
+                    "hints": {
+                        "domain": 1
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Pressure",
+            "key": "prop.press",
+            "values": [
+                {
+                    "key": "value",
+                    "name": "Value",
+                    "units": "hPa",
+                    "format": "float",
+                    "hints": {
+                        "range": 1
+                    }
+                },
+                {
+                    "key": "utc",
+                    "source": "timestamp",
+                    "name": "Timestamp",
+                    "format": "utc",
+                    "hints": {
+                        "domain": 1
+                    }
+                }
+            ]
+        },{
+            "name": "Gyro X",
+            "key": "prop.gyrox",
+            "values": [
+                {
+                    "key": "value",
+                    "name": "Value",
+                    "units": "°/s",
+                    "format": "float",
+                    "hints": {
+                        "range": 1
+                    }
+                },
+                {
+                    "key": "utc",
+                    "source": "timestamp",
+                    "name": "Timestamp",
+                    "format": "utc",
+                    "hints": {
+                        "domain": 1
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Gyro Y",
+            "key": "prop.gyroy",
+            "values": [
+                {
+                    "key": "value",
+                    "name": "Value",
+                    "units": "°/s",
+                    "format": "float",
+                    "hints": {
+                        "range": 1
+                    }
+                },
+                {
+                    "key": "utc",
+                    "source": "timestamp",
+                    "name": "Timestamp",
+                    "format": "utc",
+                    "hints": {
+                        "domain": 1
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Gyro Z",
+            "key": "prop.gyroz",
+            "values": [
+                {
+                    "key": "value",
+                    "name": "Value",
+                    "units": "°/s",
+                    "format": "float",
+                    "hints": {
+                        "range": 1
+                    }
+                },
+                {
+                    "key": "utc",
+                    "source": "timestamp",
+                    "name": "Timestamp",
+                    "format": "utc",
+                    "hints": {
+                        "domain": 1
+                    }
+                }
+            ]
+        },{
+            "name": "Launch Command",
+            "key": "prop.launched",
+            "values": [
+                {
+                    "key": "value",
+                    "name": "Launched?",
+                    "units": "enum",
+                    "enum": [
+                        "false",
+                        "true"
                     ],
-                    "hints": {
-                        "range": 1
-                    }
-                },
-                {
-                    "key": "utc",
-                    "source": "timestamp",
-                    "name": "Timestamp",
-                    "format": "utc",
-                    "hints": {
-                        "domain": 1
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Received",
-            "key": "comms.recd",
-            "values": [
-                {
-                    "key": "value",
-                    "name": "Value",
-                    "units": "bytes",
-                    "format": "integer",
-                    "hints": {
-                        "range": 1
-                    }
-                },
-                {
-                    "key": "utc",
-                    "source": "timestamp",
-                    "name": "Timestamp",
-                    "format": "utc",
-                    "hints": {
-                        "domain": 1
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Sent",
-            "key": "comms.sent",
-            "values": [
-                {
-                    "key": "value",
-                    "name": "Value",
-                    "units": "bytes",
-                    "format": "integer",
-                    "hints": {
-                        "range": 1
-                    }
-                },
-                {
-                    "key": "utc",
-                    "source": "timestamp",
-                    "name": "Timestamp",
-                    "format": "utc",
-                    "hints": {
-                        "domain": 1
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Generator Temperature",
-            "key": "pwr.temp",
-            "values": [
-                {
-                    "key": "value",
-                    "name": "Value",
-                    "units": "℃",
-                    "format": "float",
-                    "hints": {
-                        "range": 1
-                    }
-                },
-                {
-                    "key": "utc",
-                    "source": "timestamp",
-                    "name": "Timestamp",
-                    "format": "utc",
-                    "hints": {
-                        "domain": 1
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Generator Current",
-            "key": "pwr.c",
-            "values": [
-                {
-                    "key": "value",
-                    "name": "Value",
-                    "units": "Amps",
-                    "format": "float",
-                    "hints": {
-                        "range": 1
-                    }
-                },
-                {
-                    "key": "utc",
-                    "source": "timestamp",
-                    "name": "Timestamp",
-                    "format": "utc",
-                    "hints": {
-                        "domain": 1
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Generator Voltage",
-            "key": "pwr.v",
-            "values": [
-                {
-                    "key": "value",
-                    "name": "Value",
-                    "units": "Volts",
-                    "format": "float",
-                    "hints": {
-                        "range": 1
-                    }
+                    "format": "boolean"
                 },
                 {
                     "key": "utc",
@@ -181,5 +266,6 @@
                 }
             ]
         }
+        
     ]
 }

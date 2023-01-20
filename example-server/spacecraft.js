@@ -4,13 +4,17 @@
 
 function Spacecraft() {
     this.state = {
-        "prop.fuel": 77,
-        "prop.thrusters": "OFF",
-        "comms.recd": 0,
-        "comms.sent": 0,
-        "pwr.temp": 245,
-        "pwr.c": 8.15,
-        "pwr.v": 30
+        "prop.accx": 77,
+        "prop.accy": 0,
+        "prop.accz": 0,
+        "prop.alt": 0,
+        "prop.temp": 0,
+        "prop.humid": 0,
+        "prop.press": 0,
+        "prop.gyrox": 0,
+        "prop.gyroy": 0,
+        "prop.gyroz": 0,
+        "prop.launched":false,
     };
     this.history = {};
     this.listeners = [];
@@ -21,24 +25,25 @@ function Spacecraft() {
     setInterval(function () {
         this.updateState();
         this.generateTelemetry();
-    }.bind(this), 1000);
+    }.bind(this), 25);
 
     console.log("Example spacecraft launched!");
     console.log("Press Enter to toggle thruster state.");
 
     process.stdin.on('data', function () {
-        this.state['prop.thrusters'] =
-            (this.state['prop.thrusters'] === "OFF") ? "ON" : "OFF";
-        this.state['comms.recd'] += 32;
-        console.log("Thrusters " + this.state["prop.thrusters"]);
+        this.state['prop.launched'] =
+            (this.state['prop.launched'] === false) ? true : false;
+        this.state['prop.launched'] = true;
+        console.log("Launched " + this.state["prop.launched"]);
         this.generateTelemetry();
     }.bind(this));
 };
 
 Spacecraft.prototype.updateState = function () {
-    this.state["prop.fuel"] = Math.max(
+    /*
+    this.state["prop.accx"] = Math.max(
         0,
-        this.state["prop.fuel"] -
+        this.state["prop.accx"] -
             (this.state["prop.thrusters"] === "ON" ? 0.5 : 0)
     );
     this.state["pwr.temp"] = this.state["pwr.temp"] * 0.985
@@ -49,6 +54,39 @@ Spacecraft.prototype.updateState = function () {
         this.state["pwr.c"] = this.state["pwr.c"] * 0.985;
     }
     this.state["pwr.v"] = 30 + Math.pow(Math.random(), 3);
+    */
+
+    this.state["prop.accx"] = this.state["prop.accx"] * 0.985
+        + Math.random() * 0.25 + Math.sin(Date.now());
+
+    this.state["prop.accy"] = this.state["prop.accy"] * 0.985
+        + Math.random() * 0.25 + Math.sin(Date.now());
+
+    this.state["prop.accz"] = this.state["prop.accz"] * 0.985
+        + Math.random() * 0.25 + Math.sin(Date.now());
+
+    this.state["prop.alt"] = this.state["prop.alt"] * 0.985
+        + Math.random() * 0.25 + Math.sin(Date.now());
+
+    this.state["prop.temp"] = this.state["prop.temp"] * 0.985
+        + Math.random() * 0.25 + Math.sin(Date.now());
+
+    this.state["prop.humid"] = this.state["prop.humid"] * 0.985
+        + Math.random() * 0.25 + Math.sin(Date.now());
+
+    this.state["prop.press"] = this.state["prop.press"] * 0.985
+        + Math.random() * 0.25 + Math.sin(Date.now());
+
+    this.state["prop.gyrox"] = this.state["prop.gyrox"] * 0.985
+        + Math.random() * 0.25 + Math.sin(Date.now());
+
+    this.state["prop.gyroy"] = this.state["prop.gyroy"] * 0.985
+        + Math.random() * 0.25 + Math.sin(Date.now());
+
+    this.state["prop.gyroz"] = this.state["prop.gyroz"] * 0.985
+        + Math.random() * 0.25 + Math.sin(Date.now());
+    
+    this.state["prop.launched"]  = false;
 };
 
 /**
@@ -60,7 +98,7 @@ Spacecraft.prototype.generateTelemetry = function () {
     Object.keys(this.state).forEach(function (id) {
         var state = { timestamp: timestamp, value: this.state[id], id: id};
         this.notify(state);
-        this.history[id].push(state);
+        //this.history[id].push(state);
         this.state["comms.sent"] += JSON.stringify(state).length;
     }, this);
 };
