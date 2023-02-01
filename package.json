@@ -4,7 +4,7 @@
   "description": "Tutorials for Open MCT",
   "main": "example-server/server.js",
   "scripts": {
-    "start": "nodemon example-server/server.js"
+    "start": "concurrently \"nodemon example-server/server.js\" \"python example-server/getSerial.py\""
   },
   "repository": {
     "type": "git",
@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/nasa/openmct-tutorial#readme",
   "dependencies": {
+    "concurrently": "^7.6.0",
     "express": "^4.16.4",
     "express-ws": "^4.0.0",
     "openmct": "latest",
+    "serialport": "^10.5.0",
     "ws": "^6.1.2"
   }
 }

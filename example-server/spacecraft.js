@@ -14,7 +14,7 @@ function Spacecraft() {
         "prop.gyrox": 0,
         "prop.gyroy": 0,
         "prop.gyroz": 0,
-        "prop.launched":false,
+        "prop.launched": false,
     };
     this.history = {};
     this.listeners = [];
@@ -85,8 +85,8 @@ Spacecraft.prototype.updateState = function () {
 
     this.state["prop.gyroz"] = this.state["prop.gyroz"] * 0.985
         + Math.random() * 0.25 + Math.sin(Date.now());
-    
-    this.state["prop.launched"]  = false;
+
+    this.state["prop.launched"] = false;
 };
 
 /**
@@ -96,7 +96,7 @@ Spacecraft.prototype.updateState = function () {
 Spacecraft.prototype.generateTelemetry = function () {
     var timestamp = Date.now(), sent = 0;
     Object.keys(this.state).forEach(function (id) {
-        var state = { timestamp: timestamp, value: this.state[id], id: id};
+        var state = { timestamp: timestamp, value: this.state[id], id: id };
         this.notify(state);
         //this.history[id].push(state);
         this.state["comms.sent"] += JSON.stringify(state).length;
