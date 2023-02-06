@@ -11,8 +11,8 @@
                     "name": "Value",
                     "units": "m/s²",
                     "format": "float",
-                    "min": 0,
-                    "max": 100,
+                    "min": -100.000,
+                    "max": 100.000,
                     "hints": {
                         "range": 1
                     }

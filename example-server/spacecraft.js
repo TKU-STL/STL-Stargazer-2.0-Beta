@@ -2,9 +2,13 @@
  Spacecraft.js simulates a small spacecraft generating telemetry.
 */
 
+//Import mongodb
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+
 function Spacecraft() {
     this.state = {
-        "prop.accx": 77,
+        "prop.accx": 1,
         "prop.accy": 0,
         "prop.accz": 0,
         "prop.alt": 0,
@@ -55,9 +59,17 @@ Spacecraft.prototype.updateState = function () {
     }
     this.state["pwr.v"] = 30 + Math.pow(Math.random(), 3);
     */
-
-    this.state["prop.accx"] = this.state["prop.accx"] * 0.985
-        + Math.random() * 0.25 + Math.sin(Date.now());
+    //Get the data from the database with stream processing
+    MongoClient.connect(url, function (err, db) {
+        if (err) throw err;
+        var dbo = db.db("telemetry");
+        //Find the last record in the database
+        dbo.collection("telemetry").find().sort({ _id: -1 }).limit(1).toArray(function (err, result) {
+            if (err) throw err;
+            console.log(result);
+            db.close();
+        });
+    });
 
     this.state["prop.accy"] = this.state["prop.accy"] * 0.985
         + Math.random() * 0.25 + Math.sin(Date.now());
